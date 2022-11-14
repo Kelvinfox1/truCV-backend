@@ -2,11 +2,11 @@
   "name": "cv-builder-backend",
   "version": "1.0.0",
   "description": "project that incorporates machine learning to parse and analyze resume and output a score",
-  "main": "app.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node app",
-    "server": "node app",
+    "start": "node server",
+    "server": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
