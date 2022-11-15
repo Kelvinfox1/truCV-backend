@@ -89,9 +89,10 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   //Get the transaction description
   let message = req.body.Body
   console.log('recipet', message)
-  console.log('email', req.query.email)
 
   const { email } = req.query.email
+
+  console.log('email', { email })
 
   const user = await User.findOne({ email })
 
