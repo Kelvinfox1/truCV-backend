@@ -29,6 +29,8 @@ const stkpush = asyncHandler(async (req, res) => {
 
   console.log('phone', x)
 
+  console.log('request body', req.body)
+
   const url = process.env.LIPA_NA_MPESA_URL
   const BusinessShortCode = process.env.SHORT_CODE
   const key = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
@@ -85,10 +87,12 @@ const stkpush = asyncHandler(async (req, res) => {
 const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   //Get the transaction description
   let message = req.body.Body
-
   console.log('recipet', message)
 
-  return res.json({ message })
+  return res.send({
+    success: true,
+    message: message,
+  })
 })
 
 export { welcome, access_token, stkpush, lipaNaMpesaOnlineCallback }
