@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import axios from 'axios'
 import moment from 'moment'
+import User from '../models/userModel.js'
 
 // @desc    welcom to mpesa api
 // @route   GET /api/orders
@@ -89,6 +90,19 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   let message = req.body.Body
   console.log('recipet', message)
   console.log('email', req.query.email)
+
+  const { email } = req.query.email
+
+  const user = await User.findOne({ email })
+
+  if (user) {
+    user.paymentResult = {
+      id: message.stkCallback.CheckoutRequestID,
+      status: message.stkCallbac.ResultCode,
+
+      paidAt: Date.now(),
+    }
+  }
 
   return res.send({
     success: true,
