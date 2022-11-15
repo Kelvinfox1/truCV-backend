@@ -43,7 +43,7 @@ const stkpush = asyncHandler(async (req, res) => {
   const partyB = process.env.SHORT_CODE
   const phoneNumber = mobile
   const callBackUrl =
-    'https://3bd0-102-217-120-98.ngrok.io/api/mpesa/stk_callback'
+    'https://tru-cv-backend.herokuapp.com/api/mpesa/stk_callback'
   const accountReference = 'lipa-na-mpesa-tutorial'
   const transaction_desc = 'Testing lipa na mpesa functionality'
 
@@ -88,10 +88,7 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
 
   console.log(message)
 
-  return res.send({
-    success: true,
-    message,
-  })
+  return res.json({ message })
 })
 
 export { welcome, access_token, stkpush, lipaNaMpesaOnlineCallback }
