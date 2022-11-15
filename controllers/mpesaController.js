@@ -104,12 +104,15 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
 
     const updatedUser = await user.save()
 
+    console.log(updatedUser)
+
     res.json({
       paymentResult: updatedUser.paymentResult,
     })
   } else {
     res.status(404)
     throw new Error('failed')
+    console.log('failed')
   }
 
   return res.send({
