@@ -26,6 +26,7 @@ const stkpush = asyncHandler(async (req, res) => {
   const timestamp = moment().format('YYYYMMDDHHmmss')
   const x = req.query.phone
   const mobile = req.query.phone
+  const email = req.query.email
 
   console.log('phone', x)
 
