@@ -44,8 +44,7 @@ const stkpush = asyncHandler(async (req, res) => {
   const partyA = mobile //should follow the format:2547xxxxxxxx
   const partyB = process.env.SHORT_CODE
   const phoneNumber = mobile
-  const callBackUrl =
-    'https://tru-cv-backend.herokuapp.com/api/mpesa/stk_callback'
+  const callBackUrl = `https://tru-cv-backend.herokuapp.com/api/mpesa/stk_callback?email=${email}`
   const accountReference = 'lipa-na-mpesa-tutorial'
   const transaction_desc = 'Testing lipa na mpesa functionality'
 
@@ -88,6 +87,7 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   //Get the transaction description
   let message = req.body.Body
   console.log('recipet', message)
+  console.log('email', req.query.email)
 
   return res.send({
     success: true,
