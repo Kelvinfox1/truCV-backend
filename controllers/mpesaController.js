@@ -99,9 +99,17 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
     user.paymentResult = {
       id: message.stkCallback.CheckoutRequestID,
       status: message.stkCallbac.ResultCode,
-
       paidAt: Date.now(),
     }
+
+    const updatedUser = await user.save()
+
+    res.json({
+      paymentResult: updatedUser.paymentResult,
+    })
+  } else {
+    res.status(404)
+    throw new Error('failed')
   }
 
   return res.send({
