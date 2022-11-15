@@ -4,6 +4,9 @@
   "description": "project that incorporates machine learning to parse and analyze resume and output a score",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": "^14.x"
+  },
   "scripts": {
     "start": "node server",
     "server": "node server",
