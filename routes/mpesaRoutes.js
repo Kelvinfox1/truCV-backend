@@ -12,6 +12,6 @@ import { access } from '../middleware/accessTokenMiddleware.js'
 router.route('/').get(welcome)
 router.route('/access_token').get(access, access_token)
 router.route('/stk').get(access, stkpush)
-router.route('/stk_callback').get(lipaNaMpesaOnlineCallback)
+router.route('/stk_callback').post(lipaNaMpesaOnlineCallback)
 
 export default router
