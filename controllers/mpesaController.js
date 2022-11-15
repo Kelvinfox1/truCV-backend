@@ -86,7 +86,7 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   //Get the transaction description
   let message = req.body.Body
 
-  console.log(message)
+  console.log('recipet', message)
 
   return res.json({ message })
 })
