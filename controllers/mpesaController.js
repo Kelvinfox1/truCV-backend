@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import axios from 'axios'
 import moment from 'moment'
-import User from '../models/userModel.js'
+import Subscription from '../models/subscriptionModel.js'
 
 // @desc    welcom to mpesa api
 // @route   GET /api/orders
@@ -46,7 +46,7 @@ const stkpush = asyncHandler(async (req, res) => {
   const partyA = mobile //should follow the format:2547xxxxxxxx
   const partyB = process.env.SHORT_CODE
   const phoneNumber = mobile
-  const callBackUrl = `https://tru-cv-backend.herokuapp.com/api/mpesa/stk_callback?email=${email}`
+  const callBackUrl = `https://0e0c-102-217-120-98.ngrok.io/api/mpesa/stk_callback?email=${email}`
   const accountReference = 'lipa-na-mpesa-tutorial'
   const transaction_desc = 'Testing lipa na mpesa functionality'
 
@@ -88,33 +88,19 @@ const stkpush = asyncHandler(async (req, res) => {
 const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   //Get the transaction description
   let message = req.body.Body
-  console.log('recipet', message)
+  console.log('reciept', message)
+  console.log('result', message.stkCallback['CallbackMetadata'])
 
   const email = req.query.email
 
-  console.log('email', email)
+  const subscription = new Subscription({
+    email: email,
+    paidAt: Date.now(),
+  })
 
-  const user = await User.findOne({ email })
+  const createSubscription = await subscription.save()
 
-  if (user) {
-    user.paymentResult = {
-      id: message.stkCallback.CheckoutRequestID,
-      status: message.stkCallbac.ResultCode,
-      paidAt: Date.now(),
-    }
-
-    const updatedUser = await user.save()
-
-    console.log(updatedUser)
-
-    res.json({
-      paymentResult: updatedUser.paymentResult,
-    })
-  } else {
-    console.log('failed')
-    res.status(404)
-    throw new Error('failed')
-  }
+  console.log(createSubscription)
 
   return res.send({
     success: true,

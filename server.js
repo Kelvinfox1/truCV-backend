@@ -8,6 +8,7 @@ import connectDB from './config/db.js'
 import userRoutes from './routes/userRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import mpesaRoutes from './routes/mpesaRoutes.js'
+import transactionsRoutes from './routes/transactionsRoutes.js'
 
 import cors from 'cors'
 
@@ -29,6 +30,7 @@ app.use('/api/users', userRoutes)
 
 app.use('/api/upload', uploadRoutes)
 app.use('/api/mpesa', mpesaRoutes)
+app.use('/api/transactions', transactionsRoutes)
 
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
