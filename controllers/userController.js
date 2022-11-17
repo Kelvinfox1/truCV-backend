@@ -16,6 +16,9 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isSubscribed: user.isSubscribed,
+      endDate: user.endDate,
+      plan: user.plan,
       token: generateToken(user._id),
     })
   } else {
@@ -45,14 +48,15 @@ const registerUser = asyncHandler(async (req, res) => {
   })
 
   if (user) {
-
-    
     res.status(201).json({
       _id: user._id,
       name: user.name,
       phone: user.phone,
       email: user.email,
       isAdmin: user.isAdmin,
+      isSubscribed: user.isSubscribed,
+      endDate: user.endDate,
+      plan: user.plan,
       token: generateToken(user._id),
     })
   } else {
@@ -73,6 +77,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isSubscribed: user.isSubscribed,
+      endDate: user.endDate,
+      plan: user.plan,
     })
   } else {
     res.status(404)
@@ -100,6 +107,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      isSubscribed: user.isSubscribed,
+      endDate: user.endDate,
+      plan: user.plan,
       token: generateToken(updatedUser._id),
     })
   } else {
@@ -163,6 +173,9 @@ const updateUser = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      isSubscribed: user.isSubscribed,
+      endDate: user.endDate,
+      plan: user.plan,
     })
   } else {
     res.status(404)

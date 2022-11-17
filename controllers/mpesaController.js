@@ -88,14 +88,17 @@ const stkpush = asyncHandler(async (req, res) => {
 const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   //Get the transaction description
   let message = req.body.Body
+  let description = message.stkCallback['ResultDesc']
   console.log('reciept', message)
-  console.log('result', message.stkCallback['CallbackMetadata'])
+  console.log('result', message.stkCallback['ResultDesc'])
 
   const email = req.query.email
 
   const subscription = new Subscription({
     email: email,
     paidAt: Date.now(),
+    paymentDescription: description,
+    paymentResult: message,
   })
 
   const createSubscription = await subscription.save()
