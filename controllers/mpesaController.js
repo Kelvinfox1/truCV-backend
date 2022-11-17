@@ -28,27 +28,26 @@ const stkpush = asyncHandler(async (req, res) => {
   const x = req.query.phone
   const mobile = req.query.phone
   const email = req.query.email
+  const pay = req.query.amount
 
   console.log('phone', x)
 
-  console.log('request body', req.body)
-
   const url = process.env.LIPA_NA_MPESA_URL
   const BusinessShortCode = process.env.SHORT_CODE
-  const key = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+  const key = 'd71137a7d22fbb56c7c273658cd8d3e4446ca6da7a21dbcfd077a1dcb98735cd'
 
   const password = new Buffer.from(
     `${BusinessShortCode}${key}${timestamp}`
   ).toString('base64')
 
   const transcation_type = 'CustomerPayBillOnline'
-  const amount = '1' //you can enter any amount
+  const amount = pay //you can enter any amount
   const partyA = mobile //should follow the format:2547xxxxxxxx
   const partyB = process.env.SHORT_CODE
   const phoneNumber = mobile
   const callBackUrl = `https://tru-cv-backend.herokuapp.com/api/mpesa/stk_callback?email=${email}`
-  const accountReference = 'lipa-na-mpesa-tutorial'
-  const transaction_desc = 'Testing lipa na mpesa functionality'
+  const accountReference = 'Subscription of TruCv by Twenifo Technologies'
+  const transaction_desc = 'TruCv by Twenifo Technologies'
 
   try {
     let { data } = await axios
