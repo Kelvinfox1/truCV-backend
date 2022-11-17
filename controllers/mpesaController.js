@@ -112,7 +112,7 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
 
   if (check === 0) {
     console.log('checked')
-    let doc = await User.findByIdAndUpdate(filter, update, {
+    let doc = await User.findOneAndUpdate(filter, update, {
       new: true,
     })
 
