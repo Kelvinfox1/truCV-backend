@@ -26,12 +26,10 @@ const stkpush = asyncHandler(async (req, res) => {
   const token = req.token
   const auth = `Bearer ${token}`
   const timestamp = moment().format('YYYYMMDDHHmmss')
-  const x = req.query.phone
+
   const mobile = req.query.phone
   const email = req.query.email
   const pay = req.query.amount
-
-  console.log('phone', x)
 
   const url = process.env.LIPA_NA_MPESA_URL
   const BusinessShortCode = process.env.SHORT_CODE
@@ -59,7 +57,7 @@ const stkpush = asyncHandler(async (req, res) => {
           Password: password,
           Timestamp: timestamp,
           TransactionType: transcation_type,
-          Amount: '1',
+          Amount: amount,
           PartyA: partyA,
           PartyB: partyB,
           PhoneNumber: phoneNumber,
@@ -92,10 +90,6 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
 
   let check = message.stkCallback['ResultCode']
 
-  console.log('reciept', message)
-  console.log('result', message.stkCallback['ResultDesc'])
-  console.log('check', check)
-
   const email = req.query.email
 
   const subscription = new Subscription({
@@ -115,16 +109,12 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
     let doc = await User.findOneAndUpdate(filter, update, {
       new: true,
     })
-
-    console.log(doc.isSubscribed)
-    console.log('done')
   }
-
-  console.log(createSubscription)
 
   return res.send({
     success: true,
     message: message,
+    createSubscription: createSubscription,
   })
 })
 
