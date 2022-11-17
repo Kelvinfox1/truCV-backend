@@ -112,11 +112,12 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
 
   if (check === 0) {
     console.log('checked')
-    let doc = await User.findByIdAndUpdate(filter, update)
-
-    doc = await User.findOne(filter)
+    let doc = await User.findByIdAndUpdate(filter, update, {
+      new: true,
+    })
 
     console.log(doc.isSubscribed)
+    console.log('done')
   }
 
   console.log(createSubscription)
