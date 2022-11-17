@@ -94,6 +94,7 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
 
   console.log('reciept', message)
   console.log('result', message.stkCallback['ResultDesc'])
+  console.log('check', check)
 
   const email = req.query.email
 
@@ -110,6 +111,7 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   const update = { isSubscribed: true }
 
   if (check === 0) {
+    console.log('checked')
     let doc = await User.findByIdAndUpdate(filter, update)
 
     doc = await User.findOne(filter)
