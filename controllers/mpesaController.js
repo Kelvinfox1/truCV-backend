@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler'
 import axios from 'axios'
 import moment from 'moment'
 import Subscription from '../models/subscriptionModel.js'
+import User from '../models/userModel.js'
 
 // @desc    welcom to mpesa api
 // @route   GET /api/orders
@@ -58,7 +59,7 @@ const stkpush = asyncHandler(async (req, res) => {
           Password: password,
           Timestamp: timestamp,
           TransactionType: transcation_type,
-          Amount: amount,
+          Amount: '1',
           PartyA: partyA,
           PartyB: partyB,
           PhoneNumber: phoneNumber,
@@ -88,6 +89,9 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   //Get the transaction description
   let message = req.body.Body
   let description = message.stkCallback['ResultDesc']
+
+  let check = message.stkCallback['ResultCode']
+
   console.log('reciept', message)
   console.log('result', message.stkCallback['ResultDesc'])
 
@@ -101,6 +105,16 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   })
 
   const createSubscription = await subscription.save()
+
+  const filter = { email: email }
+  const update = { isSubscribed: true }
+
+  if (check === 0) {
+    let doc = await User.findByIdAndUpdate(filter, update)
+
+    doc = await User.findOne(filter)
+    doc.isSubscribed
+  }
 
   console.log(createSubscription)
 
