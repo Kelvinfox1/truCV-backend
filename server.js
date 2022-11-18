@@ -50,7 +50,7 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 } */
 
 app.get('/', (req, res) => {
-  res.send('API is running good test1....')
+  res.send('API is running good test on vercel....')
 })
 
 app.use(notFound)
