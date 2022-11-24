@@ -44,7 +44,7 @@ const userSchema = mongoose.Schema(
 )
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password)
+  return await bcrypt.compareSync(enteredPassword, this.password)
 }
 
 userSchema.pre('save', async function (next) {
@@ -52,8 +52,8 @@ userSchema.pre('save', async function (next) {
     next()
   }
 
-  const salt = await bcrypt.genSalt(10)
-  this.password = await bcrypt.hash(this.password, salt)
+  const salt = await bcrypt.genSaltSync(10)
+  this.password = await bcrypt.hashSync(this.password, salt)
 })
 
 const User = mongoose.model('User', userSchema)
