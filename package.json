@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "project that incorporates machine learning to parse and analyze resume and output a score",
   "main": "server.js",
-  "type": "module",
   "engines": {
     "node": "14.x"
   },
