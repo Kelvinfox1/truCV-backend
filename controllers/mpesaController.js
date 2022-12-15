@@ -92,6 +92,11 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
 
   const email = req.query.email
 
+  // set the end date of subscription
+
+  let date = new Date()
+  date.setDate(today.getDate() + 30)
+
   const subscription = new Subscription({
     email: email,
     paidAt: Date.now(),
@@ -102,7 +107,7 @@ const lipaNaMpesaOnlineCallback = asyncHandler(async (req, res) => {
   const createSubscription = await subscription.save()
 
   const filter = { email: email }
-  const update = { isSubscribed: true }
+  const update = { isSubscribed: true, endDate: date, plan: 'monthly' }
 
   if (check === 0) {
     console.log('checked')
