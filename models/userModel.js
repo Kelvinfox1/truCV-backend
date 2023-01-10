@@ -30,6 +30,7 @@ const userSchema = mongoose.Schema(
       default: false,
     },
     endDate: { type: Date, default: null },
+    
     plan: { type: String, enum: ['none', 'monthly', 'annually'], default: 'none' },
     paymentResult: {
       id: { type: String },

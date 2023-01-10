@@ -6,7 +6,7 @@ import multer from 'multer'
 const router = express.Router()
 
 const credential = new AffindaCredential(
-  '56ef43f875ebee6da496b8524a7c3ded2a06fa0c'
+  '471cfa5e93ed1e68be4295ee83ad03d5d6cf8907'
 )
 
 const client = new AffindaAPI(credential)
