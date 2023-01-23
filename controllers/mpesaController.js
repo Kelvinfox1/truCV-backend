@@ -30,8 +30,8 @@ const stkpush = asyncHandler(async (req, res) => {
 
   const mobile = req.query.phone
   const pay = req.query.amount
-  const id = req.query.id
-  const subscription = req.query.subscription
+  const id = encodeURIComponent(req.query.id)
+  const subscription = encodeURIComponent(req.query.subscription)
 
   const url = process.env.LIPA_NA_MPESA_URL
   const BusinessShortCode = process.env.SHORT_CODE
@@ -50,6 +50,8 @@ const stkpush = asyncHandler(async (req, res) => {
   const callBackUrl = `https://tru-cv-backend.onrender.com/api/mpesa/stk_callback?id=${id}&subscription=${subscription}`
   const accountReference = 'Subscription of TruCv by Twenifo Technologies'
   const transaction_desc = 'TruCv by Twenifo Technologies'
+
+  console.log(callBackUrl)
 
   try {
     const response = await axios.post(
