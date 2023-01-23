@@ -47,7 +47,7 @@ const stkpush = asyncHandler(async (req, res) => {
   const partyA = mobile //should follow the format:2547xxxxxxxx
   const partyB = process.env.SHORT_CODE
   const phoneNumber = mobile
-  const callBackUrl = `https://tru-cv-backend.onrender.com/api/mpesa/stk_callback?id=${id}&subscription=${subscription}`
+  const callBackUrl = `https://tru-cv-backend.herokuapp.com/api/mpesa/stk_callback?id=${id}&subscription=${subscription}`
   const accountReference = 'Subscription of TruCv by Twenifo Technologies'
   const transaction_desc = 'TruCv by Twenifo Technologies'
 
