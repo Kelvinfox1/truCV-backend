@@ -35,8 +35,8 @@ const stkpush = asyncHandler(async (req, res) => {
 
   const url = process.env.LIPA_NA_MPESA_URL
   const BusinessShortCode = process.env.SHORT_CODE
-  /*  const key = 'd71137a7d22fbb56c7c273658cd8d3e4446ca6da7a21dbcfd077a1dcb98735cd' */
-  const key = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+  const key = 'd71137a7d22fbb56c7c273658cd8d3e4446ca6da7a21dbcfd077a1dcb98735cd'
+  // const key = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
 
   const password = new Buffer.from(
     `${BusinessShortCode}${key}${timestamp}`
