@@ -25,13 +25,32 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    subscription: {
+      type: String,
+      enum: ['PAYG', 'SUBSCRIPTION'],
+      default: 'PAYG',
+    },
+    subscription_end_date: {
+      type: Date,
+    },
+    transaction_history: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Transaction',
+      },
+    ],
+
     isSubscribed: {
       type: Boolean,
       default: false,
     },
     endDate: { type: Date, default: null },
-    
-    plan: { type: String, enum: ['none', 'monthly', 'annually'], default: 'none' },
+
+    plan: {
+      type: String,
+      enum: ['none', 'cv builder', 'cv review', 'cv sample downloads'],
+      default: 'none',
+    },
     paymentResult: {
       id: { type: String },
       status: { type: String },
